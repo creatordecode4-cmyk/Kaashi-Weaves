@@ -10,6 +10,8 @@ type Props = {
   className?: string;
   sizes?: string;
   priority?: boolean;
+  /** Always render the real photo, even while USE_REAL_IMAGES is off */
+  real?: boolean;
 };
 
 /**
@@ -24,8 +26,9 @@ export default function SmartImage({
   className = "",
   sizes = "100vw",
   priority,
+  real,
 }: Props) {
-  if (USE_REAL_IMAGES) {
+  if (USE_REAL_IMAGES || real) {
     return (
       <Image
         src={src}

@@ -85,9 +85,9 @@ export default function HomePage() {
           <div className="container-x grid items-center gap-10 py-16 md:grid-cols-2 md:py-24">
             <Reveal className="relative aspect-[4/5] w-full overflow-hidden md:order-2">
               <SmartImage
-                src="/images/lookbook/teaser.jpg"
-                alt="Lookbook preview"
-                palette={["#3d0f1c", "#d4bc8f"]}
+                real
+                src="/images/store-rack.jpg"
+                alt="A rail of Banarasi silk sarees and an ivory sherwani in the Kaashi Weaves store"
                 sizes="(min-width: 768px) 50vw, 100vw"
               />
             </Reveal>
@@ -103,6 +103,31 @@ export default function HomePage() {
               <Link href="/lookbook" className="btn-light mt-8">Explore the Lookbook</Link>
             </Reveal>
           </div>
+        </div>
+      </section>
+
+      {/* Our Store */}
+      <section className="container-x pt-20 sm:pt-28" aria-labelledby="store-heading">
+        <div className="grid items-center gap-8 md:grid-cols-2 md:gap-14">
+          <Reveal className="relative aspect-[4/3] overflow-hidden">
+            <SmartImage
+              real
+              src="/images/store-craft.jpg"
+              alt="A weaver's hands working gold zari into wine silk on a handloom"
+              sizes="(min-width: 768px) 50vw, 100vw"
+            />
+          </Reveal>
+          <Reveal delay={0.1}>
+            <p className="eyebrow">Our Store</p>
+            <h2 id="store-heading" className="mt-2 text-3xl leading-tight text-wine sm:text-4xl">
+              Handcrafted in <span className="italic text-gold">Varanasi</span>
+            </h2>
+            <p className="mt-4 max-w-md leading-relaxed text-ink/80">
+              Every Kaashi Weaves silk starts on a handloom a few lanes from our store, where master weavers pass
+              gold zari through the warp one thread at a time. Visit us in Chowk to see the craft up close.
+            </p>
+            <Link href="/about" className="btn-outline mt-8">Visit the store</Link>
+          </Reveal>
         </div>
       </section>
 

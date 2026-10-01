@@ -33,8 +33,33 @@ export default function AboutPage() {
             Each collection is designed in-house and woven by master artisans we know by name.
           </p>
         </Reveal>
-        <Reveal delay={0.1} className="relative aspect-[4/5] overflow-hidden">
-          <SmartImage src="/images/about/weaver.jpg" alt="A weaver at a handloom in Varanasi" palette={["#5a1a2b", "#d4bc8f"]} label="about/weaver.jpg" sizes="(min-width: 768px) 50vw, 100vw" />
+        <Reveal delay={0.1} className="relative aspect-[4/3] overflow-hidden">
+          <SmartImage
+            real
+            src="/images/store-bahar.jpg"
+            alt="The Kaashi Weaves storefront on the ghats of Varanasi at dusk"
+            sizes="(min-width: 768px) 50vw, 100vw"
+            priority
+          />
+        </Reveal>
+      </section>
+
+      <section className="container-x pt-20 sm:pt-28" aria-labelledby="store-heading">
+        <Reveal className="mb-8 max-w-xl">
+          <p className="eyebrow">The Store</p>
+          <h2 id="store-heading" className="mt-2 text-3xl text-wine sm:text-4xl">Step inside the Chowk flagship</h2>
+          <p className="mt-4 leading-relaxed text-ink/80">
+            Silks folded floor to ceiling, brocades on brass rails and a quiet corner to try them on. Come by for a
+            cup of chai and let us drape a saree for you.
+          </p>
+        </Reveal>
+        <Reveal delay={0.1} className="relative aspect-[4/3] overflow-hidden sm:aspect-[16/9] lg:aspect-[21/9]">
+          <SmartImage
+            real
+            src="/images/store-andar.jpg"
+            alt="Inside the Kaashi Weaves store: silk sarees on shelves and rails, a display table and seating"
+            sizes="(min-width: 1280px) 1200px, 100vw"
+          />
         </Reveal>
       </section>
 
