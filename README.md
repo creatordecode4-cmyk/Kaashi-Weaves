@@ -56,10 +56,8 @@ Add JPGs at these paths under `public/`. Portrait 3:4 works best for products, a
 public/images/
 ├── hero/hero-festive-2026.jpg          # full-width, landscape ~2400×1600 (cropped to fill on mobile)
 ├── categories/men.jpg, women.jpg, kids.jpg, festive.jpg, streetwear.jpg   # 3:4
-├── lookbook/teaser.jpg                 # 4:5, home page lookbook block
 ├── lookbook/look-1.jpg … look-4.jpg    # big, ~2400px wide, used full-bleed with parallax
 ├── instagram/insta-1.jpg … insta-6.jpg # square
-├── about/weaver.jpg                    # 4:5
 └── products/<slug>-<n>.jpg             # 3:4, see table
 ```
 
@@ -77,6 +75,19 @@ public/images/
 | `butidar-co-ord-set` | `butidar-co-ord-set-1.jpg` … `butidar-co-ord-set-5.jpg` |
 | `shahi-sherwani` | `shahi-sherwani-1.jpg` … `shahi-sherwani-5.jpg` |
 | `tanchoi-dupatta` | `tanchoi-dupatta-1.jpg` … `tanchoi-dupatta-4.jpg` |
+
+### Store photos (already added, always shown)
+
+These are real photos and render even while `USE_REAL_IMAGES` is `false` (via the `real` prop on `SmartImage`):
+
+| File | Used in |
+|---|---|
+| `store-bahar.jpg` | About: hero, storefront |
+| `store-andar.jpg` | About: "The Store" section |
+| `store-craft.jpg` | Home: "Our Store · Handcrafted in Varanasi" |
+| `store-rack.jpg` | Home: lookbook teaser |
+| `store-counter.jpg` | Cart: page background |
+| `store-bahar-2.jpg` | Not used yet: alternate, squarer storefront shot |
 
 The OG / social share image is generated in code (`app/opengraph-image.tsx`), so you don't need a file for it.
 
