@@ -5,6 +5,7 @@ import ProductGallery from "@/components/product/ProductGallery";
 import ProductActions from "@/components/product/ProductActions";
 import ProductCard from "@/components/ProductCard";
 import Reveal from "@/components/Reveal";
+import RevealGrid from "@/components/RevealGrid";
 import { CATEGORIES, SITE, formatPrice } from "@/lib/config";
 import { getProduct, getRelated, productImage, products } from "@/lib/products";
 
@@ -114,13 +115,11 @@ export default async function ProductPage({ params }: Props) {
             <p className="eyebrow">Complete the look</p>
             <h2 id="related-heading" className="mt-2 text-3xl text-wine">You may also like</h2>
           </Reveal>
-          <div className="grid grid-cols-2 gap-x-3 gap-y-8 sm:gap-x-6 lg:grid-cols-4">
-            {related.map((p, i) => (
-              <Reveal key={p.slug} delay={i * 0.06}>
-                <ProductCard product={p} />
-              </Reveal>
+          <RevealGrid className="grid grid-cols-2 gap-x-3 gap-y-8 sm:gap-x-6 lg:grid-cols-4">
+            {related.map((p) => (
+              <ProductCard key={p.slug} product={p} />
             ))}
-          </div>
+          </RevealGrid>
         </section>
       </div>
     </>

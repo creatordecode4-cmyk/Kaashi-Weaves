@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import LookbookScene from "@/components/lookbook/LookbookScene";
+import LookbookStage, { type Look } from "@/components/lookbook/LookbookStage";
 import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
@@ -9,37 +9,33 @@ export const metadata: Metadata = {
   alternates: { canonical: "/lookbook" },
 };
 
-const SCENES = [
+const LOOKS: Look[] = [
   {
     n: "01",
     title: "Subah-e-Banaras",
     text: "First light on the ghats. Ivory tissue, a whisper of gold — dressed for the hour when the city is still waking.",
-    palette: ["#efe6d6", "#b08d57"] as [string, string],
-    align: "left" as const,
+    palette: ["#efe6d6", "#b08d57"],
     product: "chandni-anarkali",
   },
   {
     n: "02",
     title: "The Weaver's Lane",
     text: "Inside the karkhanas of Madanpura, a single saree takes three weeks. Every thread, a decision.",
-    palette: ["#3d0f1c", "#a3824f"] as [string, string],
-    align: "right" as const,
+    palette: ["#3d0f1c", "#a3824f"],
     product: "zari-noor-silk-saree",
   },
   {
     n: "03",
     title: "Brocade, Unbuttoned",
     text: "Heritage jacquards cut into bombers and co-ords. The loom meets the street — and neither blinks.",
-    palette: ["#1e1a1d", "#8f7a5a"] as [string, string],
-    align: "left" as const,
+    palette: ["#1e1a1d", "#8f7a5a"],
     product: "kaashi-bomber-jacket",
   },
   {
     n: "04",
     title: "Godhuli",
     text: "Cow-dust hour. Lamps on the water, wine silk catching the last of the sun. The festive season begins.",
-    palette: ["#5a1a2b", "#d4bc8f"] as [string, string],
-    align: "right" as const,
+    palette: ["#5a1a2b", "#d4bc8f"],
     product: "shahi-sherwani",
   },
 ];
@@ -53,13 +49,11 @@ export default function LookbookPage() {
           <h1 className="mx-auto mt-4 max-w-3xl text-5xl leading-[1.05] sm:text-7xl">
             Of ghats, <span className="italic text-gold-light">gold</span> &amp; the hour before dusk
           </h1>
-          <p className="mx-auto mt-6 max-w-md text-ivory/60">Scroll slowly.</p>
+          <p className="mx-auto mt-6 max-w-md text-ivory/60">Scroll to walk through the looks.</p>
         </Reveal>
       </section>
 
-      {SCENES.map((s, i) => (
-        <LookbookScene key={s.n} {...s} index={i} />
-      ))}
+      <LookbookStage looks={LOOKS} />
 
       <section className="container-x py-28 text-center">
         <Reveal>
