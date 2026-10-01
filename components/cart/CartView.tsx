@@ -104,7 +104,7 @@ export default function CartView() {
           </div>
           <div className="flex justify-between">
             <dt className="text-muted">Shipping</dt>
-            <dd>Confirmed on WhatsApp</dd>
+            <dd>{href ? "Confirmed on WhatsApp" : "Not applicable"}</dd>
           </div>
           <div className="flex justify-between border-t border-wine/15 pt-3 text-base">
             <dt className="font-medium">Total</dt>
@@ -123,7 +123,9 @@ export default function CartView() {
           </button>
         )}
         <p className="mt-3 text-center text-xs leading-relaxed text-muted">
-          No online payment — we confirm availability, shipping &amp; payment with you directly on WhatsApp.
+          {href
+            ? "No online payment — we confirm availability, shipping & payment with you directly on WhatsApp."
+            : "Concept store — no real orders. Nothing is charged or shipped."}
         </p>
       </aside>
 
