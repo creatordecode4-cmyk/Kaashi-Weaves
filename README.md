@@ -21,15 +21,26 @@ npm run lint && npm run typecheck
 | `/` | Hero (Festive Edit 2026), categories, featured products, lookbook teaser, Instagram grid |
 | `/shop` | Product grid, filters (category / price / size), sort. `?category=men` works as a deep link |
 | `/product/[slug]` | 4–5 image gallery with zoom, size select, size chart modal, quantity, add to cart, related |
-| `/cart` | Quantity change, remove, total, **Order on WhatsApp** (pre-filled summary, no payment gateway) |
+| `/cart` | Quantity change, remove, total, **Order on WhatsApp** (pre-filled summary, no payment gateway). In concept mode this opens a "concept store" modal instead |
 | `/lookbook` | Cinematic parallax scroll |
 | `/about`, `/contact` | Brand story; contact form that hands off to WhatsApp |
 
 ## Things you need to fill in
 
-All of these live in **`lib/config.ts`**:
+### Concept mode and the WhatsApp number
 
-- `WHATSAPP_NUMBER`: currently the placeholder `91XXXXXXXXXX`. Use the country code + number, digits only (e.g. `919876543210`).
+The site runs as a **concept store** by default. Pressing "Order on WhatsApp" opens a modal saying ordering is disabled and shows the cart summary. WhatsApp does not open. The contact form doesn't send anything either.
+
+To turn on real ordering for a client, set an environment variable. Don't hardcode the number in the code.
+
+```
+NEXT_PUBLIC_WHATSAPP_NUMBER=919876543210   # country code + number, digits only
+```
+
+Add it in Vercel → Settings → Environment Variables (or `.env.local` locally, see `.env.example`), then redeploy. `NEXT_PUBLIC_` variables are baked in at build time.
+
+### Other settings in `lib/config.ts`
+
 - `USE_REAL_IMAGES`: set this to `true` after you add photos (see below).
 - `SITE.email`, `SITE.instagram`: placeholders.
 - On Vercel, set the env var **`NEXT_PUBLIC_SITE_URL`** (e.g. `https://kaashi-weaves.vercel.app`). OG tags, the sitemap and canonical URLs use it.
