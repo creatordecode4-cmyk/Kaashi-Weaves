@@ -1,18 +1,13 @@
 import Link from "next/link";
 import Hero from "@/components/home/Hero";
+import CategoryScroller from "@/components/home/CategoryScroller";
+import CraftSteps from "@/components/home/CraftSteps";
+import LookbookTeaser from "@/components/home/LookbookTeaser";
 import Reveal from "@/components/Reveal";
+import RevealGrid from "@/components/RevealGrid";
 import SmartImage from "@/components/SmartImage";
 import ProductCard from "@/components/ProductCard";
-import { CATEGORIES } from "@/lib/config";
 import { products } from "@/lib/products";
-
-const CATEGORY_PALETTES: Record<string, [string, string]> = {
-  men: ["#3d0f1c", "#a3824f"],
-  women: ["#8c2a4a", "#e2b77a"],
-  kids: ["#e8b7a0", "#b08d57"],
-  festive: ["#5a1a2b", "#d4bc8f"],
-  streetwear: ["#1e1a1d", "#7a5c3a"],
-};
 
 const INSTA: [string, string][] = [
   ["#5a1a2b", "#d4bc8f"],
@@ -30,34 +25,7 @@ export default function HomePage() {
     <>
       <Hero />
 
-      {/* Categories */}
-      <section className="container-x pt-20 sm:pt-28" aria-labelledby="cat-heading">
-        <Reveal className="mb-10 text-center">
-          <p className="eyebrow">Shop by</p>
-          <h2 id="cat-heading" className="mt-2 text-3xl text-wine sm:text-4xl">Categories</h2>
-        </Reveal>
-        <div className="-mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-2 sm:mx-0 sm:grid sm:grid-cols-5 sm:overflow-visible sm:px-0 [scrollbar-width:none]">
-          {CATEGORIES.map((c, i) => (
-            <Reveal key={c.slug} delay={i * 0.06} className="w-[42%] shrink-0 snap-start sm:w-auto">
-              <Link href={`/shop?category=${c.slug}`} className="group block">
-                <div className="relative aspect-[3/4] overflow-hidden">
-                  <SmartImage
-                    src={`/images/categories/${c.slug}.jpg`}
-                    alt={`${c.label} collection`}
-                    palette={CATEGORY_PALETTES[c.slug]}
-                    sizes="(min-width: 640px) 20vw, 45vw"
-                    className="transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent" />
-                  <span className="absolute inset-x-0 bottom-4 text-center font-serif text-xl text-ivory">
-                    {c.label}
-                  </span>
-                </div>
-              </Link>
-            </Reveal>
-          ))}
-        </div>
-      </section>
+      <CategoryScroller />
 
       {/* Featured */}
       <section className="container-x pt-20 sm:pt-28" aria-labelledby="featured-heading">
@@ -70,66 +38,16 @@ export default function HomePage() {
             View all
           </Link>
         </Reveal>
-        <div className="grid grid-cols-2 gap-x-3 gap-y-8 sm:gap-x-6 lg:grid-cols-4">
-          {featured.map((p, i) => (
-            <Reveal key={p.slug} delay={(i % 4) * 0.06}>
-              <ProductCard product={p} />
-            </Reveal>
+        <RevealGrid className="grid grid-cols-2 gap-x-3 gap-y-8 sm:gap-x-6 lg:grid-cols-4">
+          {featured.map((p) => (
+            <ProductCard key={p.slug} product={p} />
           ))}
-        </div>
+        </RevealGrid>
       </section>
 
-      {/* Lookbook teaser */}
-      <section className="pt-20 sm:pt-28" aria-labelledby="lookbook-heading">
-        <div className="relative isolate overflow-hidden bg-wine">
-          <div className="container-x grid items-center gap-10 py-16 md:grid-cols-2 md:py-24">
-            <Reveal className="relative aspect-[4/5] w-full overflow-hidden md:order-2">
-              <SmartImage
-                real
-                src="/images/store-rack.jpg"
-                alt="A rail of Banarasi silk sarees and an ivory sherwani in the Kaashi Weaves store"
-                sizes="(min-width: 768px) 50vw, 100vw"
-              />
-            </Reveal>
-            <Reveal className="text-ivory">
-              <p className="eyebrow">Lookbook · Festive 2026</p>
-              <h2 id="lookbook-heading" className="mt-3 text-4xl leading-tight sm:text-5xl">
-                Of ghats, <span className="italic text-gold-light">gold</span> &amp; the hour before dusk.
-              </h2>
-              <p className="mt-5 max-w-md leading-relaxed text-ivory/70">
-                Shot along the river in Varanasi, our festive story pairs centuries-old weaves with silhouettes you
-                will actually wear.
-              </p>
-              <Link href="/lookbook" className="btn-light mt-8">Explore the Lookbook</Link>
-            </Reveal>
-          </div>
-        </div>
-      </section>
+      <LookbookTeaser />
 
-      {/* Our Store */}
-      <section className="container-x pt-20 sm:pt-28" aria-labelledby="store-heading">
-        <div className="grid items-center gap-8 md:grid-cols-2 md:gap-14">
-          <Reveal className="relative aspect-[4/3] overflow-hidden">
-            <SmartImage
-              real
-              src="/images/store-craft.jpg"
-              alt="A weaver's hands working gold zari into wine silk on a handloom"
-              sizes="(min-width: 768px) 50vw, 100vw"
-            />
-          </Reveal>
-          <Reveal delay={0.1}>
-            <p className="eyebrow">Our Store</p>
-            <h2 id="store-heading" className="mt-2 text-3xl leading-tight text-wine sm:text-4xl">
-              Handcrafted in <span className="italic text-gold">Varanasi</span>
-            </h2>
-            <p className="mt-4 max-w-md leading-relaxed text-ink/80">
-              Every Kaashi Weaves silk starts on a handloom a few lanes from our store, where master weavers pass
-              gold zari through the warp one thread at a time. Visit us in Chowk to see the craft up close.
-            </p>
-            <Link href="/about" className="btn-outline mt-8">Visit the store</Link>
-          </Reveal>
-        </div>
-      </section>
+      <CraftSteps />
 
       {/* Instagram grid */}
       <section className="container-x pt-20 sm:pt-28" aria-labelledby="insta-heading">

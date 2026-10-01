@@ -3,7 +3,7 @@
 Concept e-commerce site for **Kaashi Weaves**, a fictional Banarasi ethnic + modern fusion clothing brand.
 *Concept design project. The brand, products and prices are all made up.*
 
-**Stack:** Next.js (App Router) · TypeScript · Tailwind CSS v4 · Framer Motion · Lenis smooth scroll
+**Stack:** Next.js (App Router) · TypeScript · Tailwind CSS v4 · GSAP ScrollTrigger · Framer Motion · Lenis smooth scroll
 
 ## Run it
 
@@ -24,6 +24,23 @@ npm run lint && npm run typecheck
 | `/cart` | Quantity change, remove, total, **Order on WhatsApp** (pre-filled summary, no payment gateway). In concept mode this opens a "concept store" modal instead |
 | `/lookbook` | Cinematic parallax scroll |
 | `/about`, `/contact` | Brand story; contact form that hands off to WhatsApp |
+
+## Scroll animations
+
+Scroll-driven animations use GSAP ScrollTrigger. Lenis runs off GSAP's ticker so the two stay in sync. The shared setup is in `lib/gsap.ts`.
+
+| Where | What happens |
+|---|---|
+| Home hero | Image zooms in; the "Festive Edit 2026" text slides up and fades |
+| Home categories | Section pins and the cards scroll sideways, each easing in from the right |
+| Home featured / product "You may also like" | Cards rise in with a stagger (`components/RevealGrid.tsx`) |
+| Home "Handcrafted in Varanasi" | Weaver photo pins; three steps (Dhaaga → Bunai → Zari) cross-fade with scroll |
+| Home lookbook teaser | Three photos drift at different speeds (`data-speed`) |
+| `/lookbook` | Pinned full-screen stage; each look cross-fades in with a slow zoom |
+
+- Everything is set up inside `gsap.matchMedia("(prefers-reduced-motion: no-preference)")`. With reduced motion on, no animation or pin is created and the page shows the plain static layout.
+- Only `transform` and `opacity` are animated, and every image sits in a fixed-ratio box, so swapping placeholders for real photos doesn't move anything.
+- Shop, cart, filters and the concept-store modal have no scroll animations.
 
 ## Things you need to fill in
 

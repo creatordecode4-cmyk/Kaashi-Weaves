@@ -13,7 +13,7 @@ export default function ProductCard({ product, priority }: { product: Product; p
           palette={product.palette}
           sizes="(min-width: 1024px) 25vw, 50vw"
           priority={priority}
-          className="transition-transform duration-700 ease-out group-hover:scale-105"
+          className="transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.07]"
         />
         {product.mrp && (
           <span className="absolute left-2 top-2 bg-ivory px-2 py-0.5 text-[10px] uppercase tracking-widest text-wine">
