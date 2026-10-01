@@ -22,6 +22,8 @@ export function buildOrderMessage(items: CartItem[]) {
   ].join("\n");
 }
 
+/** Returns null when no WhatsApp number is configured (concept mode). */
 export function whatsappLink(message: string) {
+  if (!WHATSAPP_NUMBER) return null;
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 }

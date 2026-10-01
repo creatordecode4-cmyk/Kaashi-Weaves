@@ -14,10 +14,14 @@ export const SITE = {
 };
 
 /**
- * WhatsApp number for orders — country code + number, digits only.
- * PLACEHOLDER: replace before going live, e.g. "919876543210".
+ * WhatsApp number for orders, read from NEXT_PUBLIC_WHATSAPP_NUMBER
+ * (country code + number, e.g. 919876543210). Never hardcode it here.
+ * When it's unset or invalid the site runs as a concept store: ordering
+ * is disabled and the cart shows a summary modal instead of opening WhatsApp.
  */
-export const WHATSAPP_NUMBER = "91XXXXXXXXXX";
+const rawWhatsApp = (process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "").replace(/\D/g, "");
+export const WHATSAPP_NUMBER: string | null = /^\d{10,15}$/.test(rawWhatsApp) ? rawWhatsApp : null;
+export const ORDERING_ENABLED = WHATSAPP_NUMBER !== null;
 
 /**
  * Flip to true once real photos are added under public/images/

@@ -6,9 +6,12 @@ import { whatsappLink } from "@/lib/whatsapp";
 const field =
   "mt-1.5 block w-full border border-wine/20 bg-transparent px-3 py-3 text-base text-ink placeholder:text-muted/60 focus:border-wine focus:outline-none";
 
-/** No backend — the form hands the message off to WhatsApp. */
+/**
+ * No backend — the form hands the message off to WhatsApp. Without
+ * NEXT_PUBLIC_WHATSAPP_NUMBER (concept mode) nothing is sent.
+ */
 export default function ContactForm() {
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<"idle" | "sent" | "concept">("idle");
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -19,8 +22,13 @@ export default function ContactForm() {
       "",
       String(data.get("message")),
     ].join("\n");
-    window.open(whatsappLink(msg), "_blank", "noopener,noreferrer");
-    setSent(true);
+    const href = whatsappLink(msg);
+    if (!href) {
+      setStatus("concept");
+      return;
+    }
+    window.open(href, "_blank", "noopener,noreferrer");
+    setStatus("sent");
   };
 
   return (
@@ -43,9 +51,11 @@ export default function ContactForm() {
         <textarea name="message" required rows={5} className={field} placeholder="How can we help?" />
       </label>
       <button type="submit" className="btn-primary w-full">Send via WhatsApp</button>
-      {sent && (
+      {status !== "idle" && (
         <p role="status" className="text-center text-sm text-wine">
-          Opening WhatsApp… thank you, we&apos;ll be in touch soon.
+          {status === "sent"
+            ? "Opening WhatsApp… thank you, we'll be in touch soon."
+            : "This is a concept store — messages aren't sent anywhere."}
         </p>
       )}
     </form>
