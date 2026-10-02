@@ -14,6 +14,7 @@ type Item = { slug: string; label: string; palette: [string, string] };
 export default function CategoryRail({ items }: { items: Item[] }) {
   const ref = useRef<HTMLElement>(null);
   const track = useRef<HTMLDivElement>(null);
+  const pin = useRef<HTMLDivElement>(null);
   const maxX = useRef(0);
   const [height, setHeight] = useState<number | null>(null);
   const { scrollYProgress: p } = useScroll({ target: ref, offset: ["start start", "end end"] });
@@ -23,10 +24,12 @@ export default function CategoryRail({ items }: { items: Item[] }) {
   useEffect(() => {
     const measure = () => {
       const t = track.current;
-      if (!t) return;
+      const box = pin.current;
+      if (!t || !box) return;
       const viewport = window.innerWidth;
       maxX.current = Math.max(0, t.scrollWidth - viewport);
-      setHeight(window.innerHeight + maxX.current);
+      // pinned scroll distance = horizontal travel; section = content height + that travel
+      setHeight(box.offsetHeight + maxX.current);
     };
     measure();
     window.addEventListener("resize", measure);
@@ -40,7 +43,7 @@ export default function CategoryRail({ items }: { items: Item[] }) {
       style={{ height: height ?? "250svh" }}
       className="relative mt-20 sm:mt-28"
     >
-      <div className="sticky top-16 flex h-[calc(100svh-4rem)] flex-col justify-center overflow-hidden">
+      <div ref={pin} className="sticky top-20 flex flex-col overflow-hidden py-6">
         <div className="container-x mb-8 text-center">
           <p className="eyebrow">Shop by</p>
           <h2 id="cat-heading" className="mt-2 text-3xl text-wine sm:text-4xl">Categories</h2>
