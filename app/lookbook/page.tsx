@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import LookbookScene from "@/components/lookbook/LookbookScene";
+import LookbookStory from "@/components/lookbook/LookbookStory";
 import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
@@ -57,9 +57,7 @@ export default function LookbookPage() {
         </Reveal>
       </section>
 
-      {SCENES.map((s, i) => (
-        <LookbookScene key={s.n} {...s} index={i} />
-      ))}
+      <LookbookStory scenes={SCENES} />
 
       <section className="container-x py-28 text-center">
         <Reveal>
